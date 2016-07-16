@@ -1,0 +1,26 @@
+CREATE TABLE card_type (
+card_type_id INTEGER PRIMARY KEY AUTOINCREMENT,
+card_type TEXT,
+ct_image_path VARCHAR(200)
+);
+
+CREATE TABLE ability(
+ability_id INTEGER PRIMARY KEY AUTOINCREMENT,
+card_type_id INTEGER,
+ability TEXT, hidden ENUM(0,1), ability_desc TEXT,
+FOREIGN KEY(card_type_id) REFERENCES card_type(card_type_id)
+);
+
+CREATE TABLE "card"(
+card_id INTEGER PRIMARY KEY AUTOINCREMENT,
+name VARCHAR(50),
+image_path VARCHAR(200),
+ability1_id INTEGER,
+ability2_id INTEGER,
+hp TINYINTEGER,
+ap TINYINTEGER,
+type TINYINTEGER,
+FOREIGN KEY(ability1_id) REFERENCES ability(ability_id),
+FOREIGN KEY(ability2_id) REFERENCES ability(ability_id),
+FOREIGN KEY(type) REFERENCES card_type(card_type_id)
+);
